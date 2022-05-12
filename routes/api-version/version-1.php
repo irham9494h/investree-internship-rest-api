@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\Article\ArticleController;
 use App\Http\Controllers\API\Auth\LoginController;
 use App\Http\Controllers\API\Category\CategoryController;
 use Illuminate\Support\Facades\Route;
@@ -15,5 +16,13 @@ Route::middleware('auth:api')->group(function () {
         Route::get('/{id}/show', [CategoryController::class, 'show']);
         Route::put('/{id}/update', [CategoryController::class, 'update']);
         Route::delete('/{id}/delete', [CategoryController::class, 'destroy']);
+    });
+
+    Route::prefix('/article')->group(function () {
+        Route::get('/', [ArticleController::class, 'index']);
+        Route::post('/', [ArticleController::class, 'store']);
+        Route::get('/{id}/show', [ArticleController::class, 'show']);
+        Route::put('/{id}/update', [ArticleController::class, 'update']);
+        Route::delete('/{id}/delete', [ArticleController::class, 'destroy']);
     });
 });

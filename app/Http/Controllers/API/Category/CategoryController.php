@@ -8,7 +8,6 @@ use App\Http\Resources\Category\CategoryResource;
 use App\Models\Category;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
-use PhpParser\Node\Stmt\Catch_;
 
 class CategoryController extends APIController
 {

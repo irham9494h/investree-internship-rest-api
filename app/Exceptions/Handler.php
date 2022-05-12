@@ -4,6 +4,7 @@ namespace App\Exceptions;
 
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Throwable;
 
@@ -45,9 +46,13 @@ class Handler extends ExceptionHandler
                 return response()->json(['message' => 'Oops, sepertinya anda kesasar!.'], 404);
             }
 
-            if ($request->is('api/*')) {
-                return response()->json(['message' => 'Record not found'], 404);
+            if ($e instanceof AccessDeniedHttpException) {
+                return response()->json(['message' => 'Oops, anda tidak memiliki izin!.'], 404);
             }
+
+            // if ($request->is('api/*')) {
+            //     return response()->json(['message' => 'Record not found'], 404);
+            // }
         });
     }
 }
